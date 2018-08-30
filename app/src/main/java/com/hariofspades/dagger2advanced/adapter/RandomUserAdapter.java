@@ -22,9 +22,10 @@ import java.util.List;
 public class RandomUserAdapter extends RecyclerView.Adapter<RandomUserAdapter.RandomUserViewHolder> {
 
     private List<Result> resultList = new ArrayList<>();
+    private Picasso picasso;
 
-
-    public RandomUserAdapter() {
+    public RandomUserAdapter(Picasso picasso) {
+        this.picasso = picasso;
     }
 
     @Override
@@ -39,7 +40,7 @@ public class RandomUserAdapter extends RecyclerView.Adapter<RandomUserAdapter.Ra
         Result result = resultList.get(position);
         holder.textView.setText(String.format("%s %s", result.getName().getFirst(),
                 result.getName().getLast()));
-        Picasso.with(holder.imageView.getContext())
+        picasso.with(holder.imageView.getContext())
                 .load(result.getPicture().getLarge())
                 .into(holder.imageView);
     }
